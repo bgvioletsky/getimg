@@ -27,7 +27,7 @@ jobs:
       - name: commit
         run: |
               git add ${{ env.folder_path }}
-              git add name_img.txt
+              git add img_name.txt
               git add img_url.json
               git commit -m "update $(date +'%Y-%m-%d %H:%M:%S')" 
               git push 
