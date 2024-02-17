@@ -25,7 +25,7 @@ jobs:
       - name: 运行脚本
         run: |
            bash ./get.sh 20
-      - name: commit
+      - name: 提交文件
         run: |
               git config --local user.email "44770157@qq.com"
               git config --local user.name "bgcode"
@@ -34,7 +34,7 @@ jobs:
               git add img_name.txt
               git add img_url.json
               git commit -m "update $(date +'%Y-%m-%d %H:%M:%S')"  
-      - name:  Push changes
+      - name:  推送文件
         uses:    ad-m/github-push-action@master
         with:  
            branch: main
