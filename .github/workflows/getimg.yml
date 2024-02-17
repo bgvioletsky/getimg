@@ -25,6 +25,10 @@ jobs:
       - name: 运行脚本
         run: |
            bash ./get.sh 
+           cdn_prefix="https://cdn.jsdelivr.net/gh/bgvioletsky/testaction"
+           find . -type f -iname "*.jpg" | awk 'length($0) >= 13' | jq --arg prefix "$cdn_prefix" -R -s  '[split("\n")[] | select(. != "") | sub("^\\."; "") | $prefix + .]' > img_url.json
+           find . -type f -iname "*.jpg" -exec basename {} \; | awk 'length($0) >= 13' >img_name.txt
+           
       - name: 提交文件
         run: |
               git config --local user.email "44770157@qq.com"
