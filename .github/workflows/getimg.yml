@@ -24,7 +24,7 @@ jobs:
            echo "folder_path=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: 运行脚本
         run: |
-           bash ./get.sh 20
+           bash ./get.sh 18
       - name: commit
         run: |
               git config --local user.email "44770157@qq.com"
