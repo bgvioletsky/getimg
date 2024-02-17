@@ -1,0 +1,37 @@
+name: Img_Download
+
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+   - cron: '5 16 * * *'  # 本地时间每天的 1:00 执行
+env:
+    TZ: Asia/Shanghai
+
+jobs:
+   Img_download:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 检查环境
+        uses: actions/checkout@v2
+      - name: 设置环境
+        run: |
+           wget https://raw.githubusercontent.com/bgvioletsky/commod/main/get.sh
+           echo "folder_path=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+      - name: 运行脚本
+        run: |
+           bash ./get.sh 20
+      - name: commit
+        run: |
+              git add ${{ env.folder_path }}
+              git add name_img.txt
+              git add img_url.json
+              git commit -m "update $(date +'%Y-%m-%d %H:%M:%S')" 
+              git push 
+      # - name:  Push changes
+      #   uses:    ad-m/github-push-action@master
+      #   with:  
+      #      branch: main
