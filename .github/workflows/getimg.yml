@@ -3,9 +3,9 @@ name: Img_Download
 
 on:
   workflow_dispatch:
-  # push:
-  #   branches:
-  #     - main
+  push:
+    branches:
+      - main
   schedule:
    - cron: '5 16 * * *'  # 本地时间每天的 1:00 执行
 env:
@@ -24,7 +24,7 @@ jobs:
            echo "folder_path=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: 运行脚本
         run: |
-           bash -c "$(curl -fsSL https://raw.githubusercontent.com/bgvioletsky/commod/main/getimg.sh)"
+           bash -c "$(curl -fsSL https://raw.githubusercontent.com/bgvioletsky/commod/main/get.sh)"
            cdn_prefix="https://cdn.jsdelivr.net/gh/bgvioletsky/testaction"
            find . -type f -iname "*.jpg" | awk 'length($0) >= 13' | jq --arg prefix "$cdn_prefix" -R -s  '[split("\n")[] | select(. != "") | sub("^\\."; "") | $prefix + .]' > img_url.json
            find . -type f -iname "*.jpg" -exec basename {} \; | awk 'length($0) >= 13' >img_name.txt
