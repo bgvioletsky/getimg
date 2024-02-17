@@ -26,6 +26,9 @@ jobs:
            bash ./get.sh 2
       - name: commit
         run: |
+              git config --local user.email "44770157@qq.com"
+              git config --local user.name "bgcode"
+              git pull
               git add ${{ env.folder_path }}
               git add img_name.txt
               git add img_url.json
